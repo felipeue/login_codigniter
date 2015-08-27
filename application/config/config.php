@@ -8,7 +8,7 @@
 | URL to your CodeIgniter root. Typically this will be your base URL,
 | WITH a trailing slash:
 |
-|	http://example.com/s
+|	http://example.com/
 |
 | If this is not set then CodeIgniter will try to guess the protocol, domain
 | and path to your installation. However, you should always configure this
@@ -226,7 +226,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'DESARROLLO_WEB_2015';
+$config['encryption_key'] = 'CLAVE_SECRETA';
 
 /*
 |--------------------------------------------------------------------------

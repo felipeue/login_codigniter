@@ -1,7 +1,7 @@
-<?php if ( ! defined('BASEPATH')) exit('');
-session_start();
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+session_start(); 
 class Success extends CI_Controller {
-
+ 
  function __construct()
  {
    parent::__construct();
@@ -9,24 +9,25 @@ class Success extends CI_Controller {
 
  function index()
  {
-   if($this->session->userdata('data'))
+   if($this->session->userdata('logged_in'))
    {
-     $session_data = $this->session->userdata('data');
+     $session_data = $this->session->userdata('logged_in');
      $data['username'] = $session_data['username'];
      $this->load->view('success_view', $data);
    }
    else
    {
-     redirect('form', 'refresh');
+     redirect('auth', 'refresh');
    }
  }
-
+ 
  function logout()
  {
-   $this->session->unset_userdata('data');
+   $this->session->unset_userdata('logged_in');
    session_destroy();
    redirect('success', 'refresh');
  }
+ 
 }
-
+ 
 ?>

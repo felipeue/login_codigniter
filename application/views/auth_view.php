@@ -11,7 +11,7 @@
         <h1>Tarea 1 Desarrollo Web</h1>
       <p>Ingrese su nombre de usuario y contraseña para conocer los beneficios de este framework.</p>
     <?php echo validation_errors(); ?>
-   <?php echo form_open('verifylogin'); ?>
+   <?php echo form_open('validateauth'); ?>
      <label for="username">Usuario:</label>
      <input type="text" size="20" id="username" name="username"/>
      <br/>

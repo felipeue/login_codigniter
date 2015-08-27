@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class ValidateAuth extends CI_Controller {
 
@@ -11,8 +11,8 @@ class ValidateAuth extends CI_Controller {
  function index()
  {
    $this->load->library('form_validation');
-   $this->form_validation->set_rules('username', 'Username', '');
-   $this->form_validation->set_rules('password', 'Password', '');
+   $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+   $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
    if($this->form_validation->run() == FALSE)
    {
      $this->load->view('auth_view');
@@ -21,9 +21,10 @@ class ValidateAuth extends CI_Controller {
    {
      redirect('success', 'refresh');
    }
+
  }
 
- function validatedb($password)
+ function check_database($password)
  {
    $username = $this->input->post('username');
    $result = $this->user->login($username, $password);
@@ -36,13 +37,13 @@ class ValidateAuth extends CI_Controller {
          'id' => $row->id,
          'username' => $row->username
        );
-       $this->session->set_userdata('data', $a);
+       $this->session->set_userdata('logged_in', $a);
      }
      return TRUE;
    }
    else
    {
-     $this->form_validation->set_message('validatedb', 'Usuario o contraseña invalido');
+     $this->form_validation->set_message('check_database', 'Nombre o contraseña invalido');
      return false;
    }
  }
